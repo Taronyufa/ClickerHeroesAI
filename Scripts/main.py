@@ -1,19 +1,15 @@
-import pyautogui
-import pyscreenshot
-import pytesseract
-from PIL import ImageGrab
+from Damage import Damage
+from Level import Level
+from Hero import Hero
 
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
-# position of the monster
-pyautogui.moveTo(1470, 630)
+def main():
+    dmg = Damage()
+    lvl = Level()
+    # hero = Hero()
 
-while True:
-    pic = ImageGrab.grab(bbox=(1424, 187, 1556, 240))
-    text = pytesseract.image_to_string(pic)
-    if "10/10" in text:
-        pyautogui.moveTo(1544,74)
-        pyautogui.click()
+    dmg.start()
+    lvl.start()
+    # hero.start()
 
-    pyautogui.moveTo(1470, 630)
-    pyautogui.click()
-
+if __name__ == '__main__':
+    main()
