@@ -4,8 +4,8 @@ from Hero import Hero
 
 def main():
     dmg = Damage()
-    lvl = Level()
-    # hero = Hero()
+    lvl = Level(dmg)
+    # hero = Hero(dmg)
 
     dmg.start()
     lvl.start()
