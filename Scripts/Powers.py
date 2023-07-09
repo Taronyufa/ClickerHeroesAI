@@ -37,5 +37,5 @@ class Powers (Thread):
             self.activePower(999)
 
             # return the mouse to the damage position and wait 10 minutes to reactivate the powers
-            moveTo(1470, 630)
+            moveTo(1470, 600)
             sleep(630)
