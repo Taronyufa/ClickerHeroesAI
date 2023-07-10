@@ -29,7 +29,7 @@ class Level (Thread):
         mouse.click(Button.left)
         moveTo(1470, 630)
 
-    def run(self):
+    def run(self) -> None:
         while True:
             # take the picture of the clock and the next level
             pic = ImageGrab.grab(bbox=(1390, 170, 1570, 300))

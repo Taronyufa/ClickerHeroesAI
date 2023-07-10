@@ -18,7 +18,7 @@ class Powers (Thread):
         mouse.click(Button.left)
         sleep(.2)
 
-    def run(self):
+    def run(self) -> None:
         while True:
             # put the program in wait for the possibility to click
             with self.condition:
