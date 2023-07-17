@@ -6,7 +6,6 @@ from PIL import ImageGrab
 from pynput import mouse
 from time import sleep
 import pyscreenshot
-import pytesseract
 
 class Level (Thread):
     # constructor function
