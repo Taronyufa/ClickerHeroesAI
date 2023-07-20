@@ -6,15 +6,15 @@ from Hero import Hero
 
 def main():
     dmg = Damage()
-    lvl = Level(dmg)
-    pws = Powers(dmg)
-    # fish = PupperFish(dmg)
+    # lvl = Level(dmg)
+    # pws = Powers(dmg)
+    fish = PupperFish(dmg)
     # hero = Hero(dmg)
 
     dmg.start()
-    lvl.start()
-    pws.start()
-    # fish.start()
+    # lvl.start()
+    # pws.start()
+    fish.start()
     # hero.start()
 
 if __name__ == '__main__':

@@ -4,7 +4,6 @@ from threading import Thread, Condition
 from Damage import Damage
 from pynput import mouse
 import numpy
-import cv2
 
 class PupperFish (Thread):
     def __init__(self, dmg):
@@ -15,13 +14,15 @@ class PupperFish (Thread):
     def run(self) -> None:
         mouse = Controller()
         while True:
+            # takes a screenshot and locate the pupperfish with a confidence of 65%
             screen = screenshot()
-            pupperfish = cv2.cvtColor(numpy.array(screen), cv2.COLOR_RGB2BGR)
-            cords = locateOnScreen("Pupperfish.png")
-            if not cords == None: # se trova il pesce
+            cords = locateOnScreen("Pictures/Pupperfish.png", confidence=.65)
+
+            # if pupperfish is found then click its center
+            if not cords == None:
                 with self.condition:
                     self.__dmg.insertAction(self)
                     self.condition.wait()
-                moveTo((cords.left + cords.width)//2, (cords.top + cords.heigh)//2)
+                moveTo(cords.left + (cords.width // 2), cords.top + (cords.height // 2))
                 mouse.click(Button.left)
                 moveTo(1470, 600)
