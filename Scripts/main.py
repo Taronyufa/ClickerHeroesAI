@@ -8,14 +8,14 @@ def main():
     dmg = Damage()
     # lvl = Level(dmg)
     # pws = Powers(dmg)
-    fish = PupperFish(dmg)
-    # hero = Hero(dmg)
+    # fish = PupperFish(dmg) # funziona ma non funziona
+    hero = Hero(dmg)
 
     dmg.start()
     # lvl.start()
     # pws.start()
-    fish.start()
-    # hero.start()
+    # fish.start()
+    hero.start()
 
 if __name__ == '__main__':
     main()

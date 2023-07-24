@@ -16,7 +16,7 @@ class PupperFish (Thread):
         while True:
             # takes a screenshot and locate the pupperfish with a confidence of 65%
             screen = screenshot()
-            cords = locateOnScreen("Pictures/Pupperfish.png", confidence=.65)
+            cords = locateOnScreen("Pictures/Pupperfish.png", confidence=.55)
 
             # if pupperfish is found then click its center
             if not cords == None:

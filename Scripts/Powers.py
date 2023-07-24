@@ -26,15 +26,15 @@ class Powers (Thread):
                 self.condition.wait()
 
             # activate the 9 powers
+            self.activePower(888)
             self.activePower(294)
             self.activePower(372)
             self.activePower(444)
             self.activePower(555)
             self.activePower(626)
             self.activePower(721)
-            self.activePower(823)
-            self.activePower(888)
             self.activePower(999)
+            self.activePower(823)
 
             # return the mouse to the damage position and wait 10 minutes to reactivate the powers
             moveTo(1470, 600)
