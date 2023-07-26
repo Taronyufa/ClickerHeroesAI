@@ -14,19 +14,24 @@ class Level (Thread):
         self.__dmg: Damage = dmg
         self.condition = Condition()
 
+    def anyColor(self, pic, color):
+        for i in range (1):
+            for j in range (1):
+                if pic.getpixel((i, j)) == color:
+                    return True
+        return False
+
     # make the program to increase the level
     def levelUp(self) -> None:
         mouse = Controller()
         moveTo(1544, 74)
         mouse.click(Button.left)
-        moveTo(1470, 630)
 
     # make the program to decrease the level
     def levelDown(self) -> None:
         mouse = Controller()
         moveTo(1316, 80)
         mouse.click(Button.left)
-        moveTo(1470, 630)
 
     def run(self) -> None:
         while True:
@@ -35,11 +40,11 @@ class Level (Thread):
             img = ImageGrab.grab(bbox=(1518, 96, 1520, 98))
 
             # if the next level is unlocked, then go there
-            if img.getpixel((1, 1)) == (72, 122, 198):
+            if self.anyColor(img, (72, 122, 198)):
                 with self.condition:
                     self.__dmg.insertAction(self)
                     self.condition.wait()
-                    self.levelUp()
+                self.levelUp()
 
             # if its in a boss battle wait 32 seconds
             elif pic.getpixel((30, 115)) == (204, 102, 0):
@@ -51,7 +56,7 @@ class Level (Thread):
                     self.condition.wait()
 
                 # if after the boss battle there's a new level, then go there
-                if img.getpixel((1, 1)) == (72, 122, 198):
+                if self.anyColor(img, (72, 122, 198)):
                     self.levelUp()
 
                 # if theres not a new nevel then u failed the boss battle and u go back to the previous level to increase ur power

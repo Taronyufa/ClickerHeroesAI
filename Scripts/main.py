@@ -6,14 +6,14 @@ from Hero import Hero
 
 def main():
     dmg = Damage()
-    # lvl = Level(dmg)
-    # pws = Powers(dmg)
+    lvl = Level(dmg)
+    pws = Powers(dmg)
     # fish = PupperFish(dmg) # funziona ma non funziona
     hero = Hero(dmg)
 
     dmg.start()
-    # lvl.start()
-    # pws.start()
+    lvl.start()
+    pws.start()
     # fish.start()
     hero.start()
 

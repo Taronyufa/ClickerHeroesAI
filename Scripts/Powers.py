@@ -14,16 +14,16 @@ class Powers (Thread):
     # activates the power corresponding to the x coordinate
     def activePower (self, y):
         mouse = Controller()
+        with self.condition:
+            self.__dmg.insertAction(self)
+            self.condition.wait()
         moveTo(1024, y)
         mouse.click(Button.left)
-        sleep(.2)
+        moveTo(1470, 600)
+        sleep(.1)
 
     def run(self) -> None:
         while True:
-            # put the program in wait for the possibility to click
-            with self.condition:
-                self.__dmg.insertAction(self)
-                self.condition.wait()
 
             # activate the 9 powers
             self.activePower(888)
@@ -36,6 +36,4 @@ class Powers (Thread):
             self.activePower(999)
             self.activePower(823)
 
-            # return the mouse to the damage position and wait 10 minutes to reactivate the powers
-            moveTo(1470, 600)
             sleep(630)

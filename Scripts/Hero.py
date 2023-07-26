@@ -18,7 +18,7 @@ class Hero (Thread):
         num1 = abs(clr1[0] - clr2[0])
         num2 = abs(clr1[1] - clr2[1])
         num3 = abs(clr1[2] - clr2[2])
-        return (num1 + num2 + num3) < 30
+        return (num1 + num2 + num3) < 150
 
     # check if in a pic there's at least a pixel with the given color
     def anyColor(self, pic, color):
@@ -42,42 +42,42 @@ class Hero (Thread):
         i, x, y = 0, button.left + (button.width // 2), button.top + (button.height // 2)
 
         # keep trying to buy the first level of an hero
-        while pic.getpixel((x + 150, y + 84)) == (245, 233, 170):
-            moveTo(x, y)
+        while self.colorInRange(pic.getpixel((x + 150, y + 84)), (200, 233, 170)) or self.colorInRange(pic.getpixel((x + 150, y + 84)), (255, 255, 89)):
             with self.condition:
                 self.__dmg.insertAction(self)
                 self.condition.wait()
+            moveTo(x, y)
             mouse.click(Button.left)
             pic = ImageGrab.grab()
-            moveTo(1470, 630)
             sleep(1)
 
         # keep going until there's no power ups to buy
         while self.anyColor(ImageGrab.grab(bbox=(x + 150 + (61 * i), y + 37, x + 197 + (61 * i), y + 84)), (10, 10, 10)):
+            with self.condition:
+                self.__dmg.insertAction(self)
+                self.condition.wait()
             moveTo(x + 150 + (61 * i), y + 84)
             pic = ImageGrab.grab()
 
             # if the power up need a major level keep leveling up
             while self.colorInRange(pic.getpixel((x + 232 + (61 * i), y + 111)), (245, 50, 1)):
-                moveTo(x, y)
                 with self.condition:
                     self.__dmg.insertAction(self)
                     self.condition.wait()
+                moveTo(x, y)
                 mouse.click(Button.left)
                 moveTo(x + 150 + (61 * i), y + 84)
                 pic = ImageGrab.grab()
-                moveTo(1470, 630)
                 sleep(1)
 
             # keep trying to buy the new power up
             while not self.anyColor(ImageGrab.grab(bbox=(x + 150 + (61 * i), y + 37, x + 197 + (61 * i), y + 84)), (71, 198, 17)):
-                moveTo(x + 150 + (61 * i), y + 84)
                 with self.condition:
                     self.__dmg.insertAction(self)
                     self.condition.wait()
+                moveTo(x + 150 + (61 * i), y + 84)
                 mouse.click(Button.left)
                 pic = ImageGrab.grab()
-                moveTo(1470, 630)
                 sleep(1)
 
             i += 1
@@ -85,22 +85,24 @@ class Hero (Thread):
         # keep leveling up the current hero until it can afford the next hero
         pic = ImageGrab.grab()
         while self.colorInRange(pic.getpixel((x, y + 170)), (84, 110, 127)):
-            moveTo(x, y)
             with self.condition:
                 self.__dmg.insertAction(self)
                 self.condition.wait()
+            moveTo(x, y)
             mouse.click(Button.left)
-            moveTo(1470, 630)
             sleep(1)
 
     # scroll down to the next hero
     def scrollHero(self):
         mouse = Controller()
+        with self.condition:
+            self.__dmg.insertAction(self)
+            self.condition.wait()
         moveTo(930, 1045)
         for i in range (2):
             sleep(.7)
             mouse.click(Button.left)
-        moveTo(1470, 630)
+
 
     def run(self) -> None:
         while True:
