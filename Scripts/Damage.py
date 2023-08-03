@@ -17,11 +17,11 @@ class Damage (Thread):
 
     def run(self) -> None:
         mouse = Controller()
+        moveTo(1470, 630)
 
         while True:
             # while there's no other actions to do, it does damage
             while len(self.__actions) == 0:
-                moveTo(1470, 630)
                 mouse.click(Button.left)
 
             # wake up the thread that have to do an action
@@ -30,4 +30,5 @@ class Damage (Thread):
             with currentAction.condition:
                 currentAction.condition.notifyAll()
 
-            sleep(.5)
+            sleep(.7)
+            moveTo(1470, 630)

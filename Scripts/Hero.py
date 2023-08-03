@@ -18,13 +18,20 @@ class Hero (Thread):
         num1 = abs(clr1[0] - clr2[0])
         num2 = abs(clr1[1] - clr2[1])
         num3 = abs(clr1[2] - clr2[2])
-        return (num1 + num2 + num3) < 150
+        return (num1 + num2 + num3) < 30
 
     # check if in a pic there's at least a pixel with the given color
     def anyColor(self, pic, color):
         for i in range (47):
             for j in range (47):
                 if pic.getpixel((i, j)) == color:
+                    return True
+        return False
+
+    def anyColorInRange(self, pic, color):
+        for i in range (47):
+            for j in range (47):
+                if self.colorInRange(pic.getpixel((i,j)), color):
                     return True
         return False
 
@@ -60,7 +67,7 @@ class Hero (Thread):
             pic = ImageGrab.grab()
 
             # if the power up need a major level keep leveling up
-            while self.colorInRange(pic.getpixel((x + 232 + (61 * i), y + 111)), (245, 50, 1)):
+            while self.anyColorInRange(ImageGrab.grab(bbox=(x + 232 - 20 + (61 * i), y + 111 - 20, x + 232 + 27 + (61 * i), y + 111 + 27)), (250, 51, 1)):
                 with self.condition:
                     self.__dmg.insertAction(self)
                     self.condition.wait()
@@ -100,7 +107,7 @@ class Hero (Thread):
             self.condition.wait()
         moveTo(930, 1045)
         for i in range (2):
-            sleep(.7)
+            sleep(.1)
             mouse.click(Button.left)
 
 
