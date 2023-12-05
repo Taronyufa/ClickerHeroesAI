@@ -1,9 +1,10 @@
 from pynput.mouse import Controller, Button
 from threading import Thread, Condition
-from pyautogui import moveTo
+from pyautogui import moveTo, FAILSAFE
 from Damage import Damage
 from pynput import mouse
 from time import sleep
+FAILSAFE = False
 
 class Powers (Thread):
     def __init__(self, dmg):
@@ -19,7 +20,6 @@ class Powers (Thread):
             self.condition.wait()
         moveTo(1024, y)
         mouse.click(Button.left)
-        moveTo(1470, 600)
         sleep(.1)
 
     def run(self) -> None:

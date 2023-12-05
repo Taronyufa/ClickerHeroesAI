@@ -1,11 +1,12 @@
 from pynput.mouse import Controller, Button
 from threading import Thread, Condition
-from pyautogui import moveTo
+from pyautogui import moveTo, FAILSAFE
 from Damage import Damage
 from PIL import ImageGrab
 from pynput import mouse
 from time import sleep
 import pyscreenshot
+FAILSAFE = False
 
 class Level (Thread):
     # constructor function

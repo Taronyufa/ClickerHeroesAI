@@ -1,4 +1,4 @@
-from pyautogui import screenshot, locateOnScreen, moveTo
+from pyautogui import screenshot, locateOnScreen, moveTo, FAILSAFE
 from pynput.mouse import Controller, Button
 from threading import Thread, Condition
 from Damage import Damage
@@ -6,6 +6,7 @@ from PIL import ImageGrab
 from pynput import mouse
 from time import sleep
 import pyscreenshot
+FAILSAFE = False
 
 class Hero (Thread):
     def __init__(self, dmg):
